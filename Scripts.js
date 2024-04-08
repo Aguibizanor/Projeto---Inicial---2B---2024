@@ -3,31 +3,42 @@ botao.addEventListener("click", alertar);
 var nome = document.getElementById("nome");
 var saida = document.getElementById("saida-de-dados");
 var email = document.getElementById("email");
-var tel = document.getElementById("tel");
-var Cep = document.getElementById("Cep");
+var telefone = document.getElementById("telefone");
+var cep = document.getElementById("cep");
 var logradouro = document.getElementById("logradouro");
-var núm = document.getElementById("núm");
+var numero = document.getElementById("numero");
 var complemento = document.getElementById("complemento");
 var bairro = document.getElementById("bairro");
 var cidade = document.getElementById("cidade");
 var estado = document.getElementById("estado");
-
+ 
 function alertar(event){
-    //alert("Você clicou no botão!!!!" + event);
-
-    const url = `http://viacep.com.br/ws/${Cep.value}/json`;
+    //alert("Voce clicou no botão!!!!");//
+ 
+    const url = `https://viacep.com.br/ws/${cep.value}/json`;
     fetch(url)
-    .then(resposta=>resposta.json())
-    .then(dados=>alert(dados.bairro))
-
-    saida.innerText = "Nome: " + nome.value +
-    "\n Email: " + email.value +
-    "\n Telefone:" + tel.value +
-    "\n CEP:" + Cep.value +
-    "\n logradouro:" + logradouro.value +
-    "\n Número:" + núm.value +
-    "\n Complemento:" + complemento.value +
-    "\n Bairro:" + bairro.value +
-    "\n Cidade:" + cidade.value +
-    "\n Estado:" + estado.value;
+    .then(function (resposta){
+        return resposta.json()
+    })
+    .then(function (dados){
+        logradouro.value =  dados.logradouro;
+        bairro.value = dados.bairro;
+        cidade.value = dados.localidade;
+        estado.value = dados.uf;
+    })
+ 
+}
+ 
+function saidaDeDados(){  
+    saida.innerText = "Nome: " +nome.value +
+    "\n Email " + email.value +
+    "\n Telefone " + telefone.value +
+    "\n cep " + cep.value +
+    "\n logradouro " + logradouro.value +
+    "\n numero " + numero.value +
+    "\n complemento " + complemento.value +
+    "\n bairro " + bairro.value +
+    "\n cidade " + cidade.value +
+    "\n estado " + estado.value ;
+ 
 }
